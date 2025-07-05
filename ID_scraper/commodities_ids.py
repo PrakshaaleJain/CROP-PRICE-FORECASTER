@@ -3,6 +3,10 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import pandas as pd
 import time
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 service = Service()  # Or use Service("path/to/chromedriver") if not in PATH
 options = webdriver.ChromeOptions()
@@ -22,7 +26,8 @@ commodities = {
 }
 
 # Save to CSV
+path = os.environ.get("commodity_ID_path")      # change to your own path and name of the csv file
 df = pd.DataFrame(list(commodities.items()), columns=["Commodity", "ID"])
-df.to_csv(r"C:\Users\HP\OneDrive\Desktop\CROP PRICE FORCASTER\ID\commodity_ids.csv", index=False)
+df.to_csv(path, index=False)
 
 driver.quit()
